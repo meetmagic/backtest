@@ -1,0 +1,5 @@
+mongodb:
+  client: "127.0.0.1:27017"
+  database: backtest{{ env }}
+  username: backtest{{ env }}
+  password: testback{{ env }}
