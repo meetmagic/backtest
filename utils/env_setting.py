@@ -10,6 +10,7 @@ class Settings:
     def __init__(self, env=None):
         cfg_data = self._parse_config(env)
         self.mongodb = cfg_data.get("mongodb")
+        self.tushare = cfg_data.get("tushare")
 
     def _parse_config(self, env=None):
         with open(CFG_FILE, 'r') as f:

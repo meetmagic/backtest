@@ -3,3 +3,6 @@ mongodb:
   database: backtest{{ env }}
   username: backtest{{ env }}
   password: testback{{ env }}
+
+tushare:
+  token: 5cf77834fdd5923b427d6210cf4cba415c73382a1b55ad5195b7bbcf
