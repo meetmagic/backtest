@@ -4,7 +4,6 @@ from utils import dbengine
 
 class TestBacktestDB:
 
-    def test_backtest_db_initialization(self):
-        backtest_db = dbengine.BacktestDB()
-        collection_list = backtest_db.db.list_collection_names
-        assert 'backtest' in collection_list, 'mongodb client was not initialized correctly'
+    def test_backtest_db_initialization(self, backtestdb):
+        collection_list = backtestdb.db.list_collection_names()
+        assert isinstance(collection_list, list), "Did not connect to backtest database correctly"

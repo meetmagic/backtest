@@ -1,5 +1,6 @@
 from pytest import fixture
 from utils.env_setting import Settings
+from utils.dbengine import BacktestDB
 
 @fixture(scope="session", autouse=False)
 def env():
@@ -9,3 +10,8 @@ def env():
 @fixture(scope="session", autouse=False)
 def mongodb(env):
     return env.mongodb
+
+@fixture(scope="session", autouse=False)
+def backtestdb():
+    backtestdb = BacktestDB("dev")
+    return backtestdb
