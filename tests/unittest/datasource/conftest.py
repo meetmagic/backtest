@@ -1,15 +1,21 @@
 from pytest import fixture
-from utils.env_setting import Settings
-from datasource.from_tushare import TushareHanlder
+
+from datasource.from_tushare import TushareHanlder, TushareDailyPrice
+from datasource.from_cninfo import CNInfoHandler
 
 
 @fixture(scope="session", autouse=False)
-def settings():
-    env = Settings("dev")
-    return env
-
-
-@fixture(scope="session", autouse=False)
-def tusharehandler(settings):
-    tusharehandler = TushareHanlder(settings.tushare["token"])
+def tusharehandler():
+    tusharehandler = TushareHanlder()
     return tusharehandler
+
+
+@fixture(scope="session", autouse=False)
+def tusharedailyprice():
+    tusharedailyprice = TushareDailyPrice.find(ts_code="601288.SH")
+    return tusharedailyprice
+
+@fixture(scope="session", autouse=False)
+def cninfohandler():
+    cninfohandler = CNInfoHandler()
+    return cninfohandler

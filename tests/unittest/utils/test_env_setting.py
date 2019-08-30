@@ -1,5 +1,7 @@
-import pytest
+from pytest import mark
 
+
+@mark.foundationtest
 class TestSettings:
 
     def test_mongodb_setup(self, mongodb):

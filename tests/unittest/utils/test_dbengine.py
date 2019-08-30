@@ -1,7 +1,15 @@
+from pytest import mark
 
 
-class TestBacktestDB:
+@mark.foundationtest
+class TestDBEngine:
 
-    def test_backtest_db_initialization(self, backtestdb):
-        collection_list = backtestdb.db.list_collection_names()
-        assert isinstance(collection_list, list), "Did not connect to backtest database correctly"
+    def test_mongodb_client(self, mongodbclient):
+        db = mongodbclient.client.get_database()
+        collection = db.test
+        collection.insert_one({"key": "value"})
+        item = collection.find_one()
+        item.pop("_id", None)
+        assert item == {"key": "value"}
+        collection.drop()
+
