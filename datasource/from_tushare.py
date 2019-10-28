@@ -123,12 +123,25 @@ class TushareHanlder(MongoDatabase):
         trade_date = self.db[collection].find_one(query, projection=projection)
         return trade_date["pretrade_date"]
 
-    def get_stock_basic(self, ts_code):
+    def get_stock_basic(self, ts_code=None, industry=None):
         collection = "tushare_stock_basic"
-        query = {
-            "ts_code": ts_code
-        }
+        query = {}
+        if ts_code:
+            query["ts_code"] = ts_code
+        if industry:
+            query["industry"] = industry
+
         return self.db[collection].find_one(query)
+
+    def get_stocks_basic(self, ts_code=None, industry=None):
+        collection = "tushare_stock_basic"
+        query = {}
+        if ts_code:
+            query["ts_code"] = ts_code
+        if industry:
+            query["industry"] = industry
+
+        return self.db[collection].find(query)
 
     def get_daily_bar(self, ts_code):
         collection = "tushare_daily_bar"
@@ -149,7 +162,10 @@ class TushareDailyPrice(MongoDBModel):
 def tushare_daily_tasks(tushare_handler):
     tushare_handler.save_stock_basic()
     trade_date = date.today().strftime("%Y%m%d")
+    # trade_date = '20191010'
     tushare_handler.save_daily_bar(trade_date=trade_date)
+    # tushare_handler.save_daily_bar(trade_date="20190909")
+
 
 def tushare_annual_tasks(tushare_handler):
     for year in range(1990, 2020):

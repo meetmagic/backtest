@@ -31,7 +31,7 @@ class MongoDatabase:
         return self.db[table_name].find(kwargs)
 
     def save_dataframe_to_collection(self, collection, dataframe):
-        data_in_dict = json.loads(dataframe.T.to_json()).values()
+        data_in_dict = dataframe.to_dict("records")
         result = self.db[collection].insert_many(data_in_dict)
         return result.inserted_ids
 
@@ -41,7 +41,7 @@ class MongoDatabase:
         result = self.db[collection].delete_many(query)
 
         if result.deleted_count is not None:
-            data_in_dict = json.loads(dataframe.T.to_json()).values()
+            data_in_dict = dataframe.to_dict("records")
             result = self.db[collection].insert_many(data_in_dict)
             return result.inserted_ids
 

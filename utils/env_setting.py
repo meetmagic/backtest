@@ -13,6 +13,7 @@ class Settings:
         cfg_data = self._parse_config()
         self.mongodb = cfg_data.get("mongodb")
         self.tushare = cfg_data.get("tushare")
+        self.finance_report = cfg_data.get("finance_report")
 
     def _parse_config(self):
         env = os.getenv("backtestEnv", "")

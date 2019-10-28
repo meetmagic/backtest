@@ -6,3 +6,11 @@ mongodb:
 
 tushare:
   token: f27c7447637fb48e933c66392d7544100b466819e36a7b1830a100ac
+
+finance_report:
+  home: "c:\\gitrepo\\finance_report{{ env }}"
+  report_url_file: "report_urls.csv"
+  download_home: "download"
+  pdf_home: "pdf"
+  html_home: "html"
+  excel_home: "excel"
